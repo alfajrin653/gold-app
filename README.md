@@ -26,3 +26,4 @@ backend/prisma (schema, seed) | backend/src/{config,middleware,routes,utils,sock
 2. `npm install`
 3. `npm run dev`  -> http://localhost:5173
 Pastikan CLIENT_URL di backend/.env = http://localhost:5173
+# gold-app

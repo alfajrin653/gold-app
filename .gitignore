@@ -1,0 +1,15 @@
+# Abaikan node_modules di semua subfolder
+**/node_modules/
+node_modules/
+
+# Abaikan file build / kompilasi
+**/dist/
+**/build/
+
+# Abaikan file konfigurasi rahasia
+**/.env
+.env
+
+# File sampah sistem operasi
+.DS_Store
+Thumbs.db

@@ -1,0 +1,87 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  SALES
+  MANAGEMENT
+}
+
+enum TxType {
+  BELI
+  JUAL
+}
+
+enum TxStatus {
+  MENUNGGU
+  DISETUJUI
+  DITOLAK
+}
+
+model User {
+  id           Int           @id @default(autoincrement())
+  name         String
+  email        String        @unique
+  password     String
+  role         Role
+  createdAt    DateTime      @default(now())
+  transactions Transaction[] @relation("sales")
+}
+
+model Transaction {
+  id               Int      @id @default(autoincrement())
+  type             TxType
+  status           TxStatus @default(MENUNGGU)
+  salesId          Int
+  sales            User     @relation("sales", fields: [salesId], references: [id])
+  salesName        String
+  location         String
+  counterpartyName String // nama penjual (BELI) / nama pembeli (JUAL)
+
+  description String?
+
+  grams              Decimal @db.Decimal(12, 3)
+  pricePerGram       Decimal @db.Decimal(14, 2)
+  totalPrice         Decimal @db.Decimal(16, 2)
+  karat              Int
+  accountNumber      String?
+  photoGold          String?
+  photoSaleProof     String?
+  photoTransferProof String?
+
+  approvalTransferProof String?
+
+  rejectNote     String?
+  reviewedById   Int?
+  reviewedByName String?
+  reviewedAt     DateTime?
+  createdAt      DateTime  @default(now())
+
+  @@index([status])
+  @@index([createdAt])
+  @@index([salesName])
+  @@index([location])
+}
+
+model Stock {
+  id         Int      @id @default(1)
+  totalGrams Decimal  @default(0) @db.Decimal(14, 3)
+  updatedAt  DateTime @updatedAt
+}
+
+model AuditLog {
+  id            Int      @id @default(autoincrement())
+  action        String
+  transactionId Int?
+  userId        Int
+  userName      String
+  detail        Json?
+  createdAt     DateTime @default(now())
+
+  @@index([createdAt])
+}

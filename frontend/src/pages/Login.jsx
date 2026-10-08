@@ -21,14 +21,14 @@ export default function Login() {
       <motion.form onSubmit={submit} initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="card relative w-full max-w-sm space-y-5 p-8">
         <div className="text-center">
           <div className="mx-auto mb-3 grid h-14 w-14 place-items-center rounded-2xl bg-amber-50 text-amber-500"><Coins size={28} /></div>
-          <h1 className="text-2xl font-extrabold text-slate-800">Gold<span className="text-sky-500">Trade</span></h1>
+          <h1 className="text-2xl font-extrabold text-slate-800">Intranet<span className="text-sky-500">BMI</span></h1>
           <p className="mt-1 text-sm text-slate-400">Masuk untuk mengelola transaksi emas</p>
         </div>
         <div><label className="label">Email</label><input className="input" type="email" required value={f.email} onChange={(e) => setF({ ...f, email: e.target.value })} placeholder="nama@perusahaan.com" /></div>
         <div><label className="label">Password</label><input className="input" type="password" required value={f.password} onChange={(e) => setF({ ...f, password: e.target.value })} placeholder="••••••••" /></div>
         {err && <p className="rounded-xl bg-rose-50 px-4 py-2.5 text-sm text-rose-600">{err}</p>}
         <button disabled={busy} className="btn-primary w-full">{busy && <Loader2 size={16} className="animate-spin" />} Masuk</button>
-        <p className="text-center text-xs text-slate-300">Demo: sales@demo.com / manager@demo.com &middot; password123</p>
+        <p className="text-center text-xs text-slate-300">Intranet </p>
       </motion.form>
     </div>
   )
